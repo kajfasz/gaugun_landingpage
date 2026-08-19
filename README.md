@@ -1,8 +1,8 @@
 # GauGun
 
-Prosty landing zespołu: logo, krótki opis i linki.
+Prosty landing zespołu: logo, opis, linki, naklejki i QR.
 
-## Uruchomienie
+## Uruchomienie lokalne
 
 ```bash
 python3 -m venv .venv
@@ -11,9 +11,9 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Strona wstaje na [http://127.0.0.1:5000](http://127.0.0.1:5000).
+Strona wstaje na [http://127.0.0.1:5000](http://127.0.0.1:5000). Angielska wersja: `/en`.
 
-Na serwerze (nasłuch na wszystkich interfejsach):
+`python app.py` trzyma debuger tylko na localhost. Na serwerze używaj gunicorn, bez `debug=True`:
 
 ```bash
 gunicorn --bind 0.0.0.0:5000 app:app
@@ -23,5 +23,6 @@ gunicorn --bind 0.0.0.0:5000 app:app
 
 Wszystko siedzi w `content.py`:
 
-- `SITE` — nazwa i krótki opis
-- `LINKS` — lista odnośników
+- `SITE` — nazwa, rok, adres strony i mail
+- `COPY` — teksty PL/EN
+- `LINKS` — Facebook, Instagram, YouTube

@@ -43,6 +43,45 @@ body {
   padding: 3.2rem 0 5rem;
 }
 
+.lang-switch {
+  position: absolute;
+  top: 1.15rem;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.flag {
+  display: block;
+  width: 1.85rem;
+  height: 1.3rem;
+  overflow: hidden;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28);
+}
+
+.flag svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.lang-switch-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.lang-switch:hover .lang-switch-label,
+.lang-switch:focus-visible .lang-switch-label {
+  color: var(--ink);
+}
+
 .hero {
   padding-bottom: 2rem;
   border-bottom: 1px solid var(--line);
@@ -100,22 +139,57 @@ body {
 
 .links a {
   display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  align-items: baseline;
+  align-items: center;
+  gap: 0.85rem;
   padding: 0.85rem 0;
   border-bottom: 1px solid var(--line);
   color: inherit;
   text-decoration: none;
 }
 
+.link-icon {
+  display: grid;
+  flex: 0 0 1.7rem;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  color: var(--cyan);
+}
+
+.links li:nth-child(2) .link-icon {
+  color: var(--magenta);
+}
+
+.links li:nth-child(3) .link-icon {
+  color: var(--yellow);
+}
+
+.links li:nth-child(4) .link-icon {
+  color: var(--magenta);
+}
+
+.link-icon svg {
+  display: block;
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.links a:hover .link-icon,
+.links a:focus-visible .link-icon {
+  filter: drop-shadow(0 0 7px currentColor);
+}
+
 .links a:hover .link-title,
-.links a:focus-visible .link-title {
+.links a:hover .link-note,
+.links a:focus-visible .link-title,
+.links a:focus-visible .link-note {
   color: var(--magenta);
 }
 
 .links li:nth-child(even) a:hover .link-title,
-.links li:nth-child(even) a:focus-visible .link-title {
+.links li:nth-child(even) a:hover .link-note,
+.links li:nth-child(even) a:focus-visible .link-title,
+.links li:nth-child(even) a:focus-visible .link-note {
   color: var(--cyan);
 }
 
@@ -126,22 +200,139 @@ body {
   text-transform: uppercase;
 }
 
+.link-copy {
+  display: flex;
+  flex: 1;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  min-width: 0;
+}
+
 .link-note {
   color: var(--muted);
   font-size: 0.92rem;
 }
 
+.sticker-card {
+  display: grid;
+  grid-template-columns: 168px 1fr;
+  gap: 1rem 1.4rem;
+  align-items: center;
+  padding: 1.15rem 0.35rem;
+}
+
+.sticker-art {
+  display: block;
+  width: 168px;
+  height: 168px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--magenta), 0 0 0 4px var(--cyan);
+  transform: rotate(-20deg);
+}
+
+.sticker-copy {
+  color: var(--muted);
+}
+
+.sticker-copy p {
+  margin: 0 0 0.55rem;
+}
+
+.sticker-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.sticker-lead {
+  color: var(--ink);
+  font-weight: 650;
+}
+
+.sticker-copy a {
+  color: var(--cyan);
+  text-decoration: none;
+}
+
+.sticker-copy a:hover,
+.sticker-copy a:focus-visible {
+  color: var(--magenta);
+}
+
+.qr {
+  margin: 3rem 0 0;
+  text-align: center;
+}
+
+.qr img {
+  display: block;
+  width: 168px;
+  height: 168px;
+  margin: 0 auto;
+  padding: 0.55rem;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.qr figcaption {
+  max-width: 22rem;
+  margin: 0.85rem auto 0;
+  color: #7d7d7d;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.qr figcaption a {
+  color: #9a9a9a;
+  text-decoration: none;
+}
+
+.qr figcaption a:hover,
+.qr figcaption a:focus-visible {
+  color: #c2c2c2;
+}
+
+.legal {
+  margin-top: 3rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.legal p {
+  margin: 0;
+}
+
 @media (max-width: 560px) {
   .page {
-    padding-top: 2rem;
+    padding-top: 2.8rem;
+  }
+
+  .lang-switch {
+    top: 0.35rem;
   }
 
   .logo {
     width: min(180px, 64vw);
   }
 
-  .links a {
+  .link-copy {
     flex-direction: column;
-    gap: 0.15rem;
+    align-items: flex-start;
+    gap: 0.12rem;
+  }
+
+  .sticker-card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .sticker-art {
+    width: 196px;
+    height: 196px;
   }
 }

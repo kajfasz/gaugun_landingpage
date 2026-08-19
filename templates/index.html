@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="{{ copy.html_lang }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ site.name }}</title>
-    <meta name="description" content="{{ site.description }}" />
-    <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml" />
+    <meta name="description" content="{{ copy.description }}" />
+    <link rel="alternate" hreflang="pl" href="{{ url_for('index_pl') }}" />
+    <link rel="alternate" hreflang="en" href="{{ url_for('index_en') }}" />
+    <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/png" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   </head>
   <body>
     <div class="backdrop" aria-hidden="true"></div>
     <main class="page">
+      <a
+        class="lang-switch"
+        href="{{ copy.other_path }}"
+        hreflang="{{ copy.other_lang }}"
+        lang="{{ copy.other_lang }}"
+        title="{{ copy.switch_label }}"
+      >
+        <span class="flag">{% include 'icons/flag-' ~ copy.other_lang ~ '.svg' %}</span>
+        <span class="lang-switch-label">{{ copy.switch_label }}</span>
+      </a>
+
       <header class="hero">
         <h1 class="logo-wrap">
           <img
@@ -22,25 +35,66 @@
           />
         </h1>
         <div class="bio">
-          {% for paragraph in site.bio %}
+          {% for paragraph in copy.bio %}
           <p>{{ paragraph }}</p>
           {% endfor %}
         </div>
       </header>
 
       <section class="block" aria-labelledby="links-heading">
-        <h2 id="links-heading">Linki</h2>
+        <h2 id="links-heading">{{ copy.links_heading }}</h2>
         <ul class="links">
           {% for link in links %}
           <li>
-            <a href="{{ link.url }}">
-              <span class="link-title">{{ link.title }}</span>
-              <span class="link-note">{{ link.note }}</span>
+            <a
+              href="{{ link.url }}"
+              {% if link.url.startswith("http") %}rel="noopener noreferrer"{% endif %}
+            >
+              <span class="link-icon" aria-hidden="true">
+                {% include 'icons/' ~ link.icon ~ '.svg' %}
+              </span>
+              <span class="link-copy">
+                <span class="link-title">{{ link.title }}</span>
+                <span class="link-note">{{ link.note }}</span>
+              </span>
             </a>
           </li>
           {% endfor %}
         </ul>
       </section>
+
+      <section class="block" aria-labelledby="sticker-heading">
+        <h2 id="sticker-heading">{{ copy.sticker_heading }}</h2>
+        <div class="sticker-card">
+          <img
+            class="sticker-art"
+            src="{{ url_for('static', filename='img/sticker.jpg') }}"
+            alt="{{ copy.sticker_alt }}"
+            width="900"
+            height="900"
+          />
+          <div class="sticker-copy">
+            <p class="sticker-lead">{{ copy.sticker_lead }}</p>
+            <p>{{ copy.sticker_text }}</p>
+          </div>
+        </div>
+      </section>
+
+      <figure class="qr">
+        <a href="{{ site.url }}">
+          <img
+            src="{{ url_for('static', filename='img/gaugun-qr.png') }}"
+            alt="{{ copy.qr_alt }}"
+            width="330"
+            height="330"
+          />
+        </a>
+        <figcaption>{{ copy.qr_caption }}</figcaption>
+      </figure>
+
+      <footer class="legal">
+        <p>© {{ site.year }} {{ site.name }}</p>
+      </footer>
     </main>
   </body>
 </html>
