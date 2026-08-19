@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ site.name }}</title>
+    <meta name="description" content="{{ site.description }}" />
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <div class="backdrop" aria-hidden="true"></div>
+    <main class="page">
+      <header class="hero">
+        <h1 class="logo-wrap">
+          <img
+            class="logo"
+            src="{{ url_for('static', filename='img/logo.png') }}"
+            alt="{{ site.name }}"
+            width="350"
+            height="530"
+          />
+        </h1>
+        <div class="bio">
+          {% for paragraph in site.bio %}
+          <p>{{ paragraph }}</p>
+          {% endfor %}
+        </div>
+      </header>
+
+      <section class="block" aria-labelledby="links-heading">
+        <h2 id="links-heading">Linki</h2>
+        <ul class="links">
+          {% for link in links %}
+          <li>
+            <a href="{{ link.url }}">
+              <span class="link-title">{{ link.title }}</span>
+              <span class="link-note">{{ link.note }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
